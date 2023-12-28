@@ -15,11 +15,13 @@ export const todoslice = createSlice({
       state.todos.push(todo);
     },
     deletetodo: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);   // react will automatically compare the id from payload
+      state.todos = state.todos.filter((t) => t.id !== action.payload);   // react will automatically compare the id from payload
     },
-    updatetodo: (state, action) => {}
+    updatetodo: (state, action) => {
+      state.todos = state.todos.map((t) => t.id === action.payload ? {...t, text : action.payload} : t )
+    }
   }
 });
 
-export const { addtodo, deletetodo } = todoslice.actions;
+export const { addtodo, deletetodo,updatetodo } = todoslice.actions;
 export default todoslice.reducer;
